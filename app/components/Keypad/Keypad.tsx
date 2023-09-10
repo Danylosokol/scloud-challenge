@@ -7,13 +7,22 @@ import { useMessage } from "@/app/context/MessageProvider";
 import { useCustomer } from "@/app/context/CustomerProvider";
 import { useScreen } from "@/app/context/ScreenProvider";
 import { ScreenType } from "../Screen/Screens/ScreensConsts";
+import { brutAtmAlgo } from "@/app/utils/ATMLogic";
+import { NotesType } from "@/types/ATM";
 import axios from "axios";
 
 function Keypad() {
-  const {currentNotes} = useATM();
+  const { currentNotes } = useATM();
   const { pin, setPin, setIsPinValid } = usePin();
-  const { currentScreen } = useScreen();
-  const { currentWithdrawal, setCurrentWithdrawal } = useCustomer();
+  const { currentScreen, setCurrentScreen } = useScreen();
+  const {
+    currentWithdrawal,
+    setCurrentWithdrawal,
+    currentBalance,
+    currentOverdraft,
+    setCurrentOverdraft,
+    overdraftLimit,
+  } = useCustomer();
   const { setMessage } = useMessage();
   const { setCurrentBalance } = useCustomer();
 
@@ -28,6 +37,8 @@ function Keypad() {
         setPin("");
         setIsPinValid(true);
         setCurrentBalance(response.data.currentBalance);
+        // Here I would update overdraft's data from DB
+        setCurrentOverdraft(0);
       })
       .catch((error) => {
         console.log(error);
@@ -37,8 +48,39 @@ function Keypad() {
   };
 
   const confirmWithdrawal = () => {
-    
-  }
+   const notes: NotesType[] = currentNotes.map((obj) => ({ ...obj }));
+    const atmTotalBalance = notes.reduce(
+      (balance: number, note: NotesType) => {
+        return balance + note.value * note.amount;
+      },
+      0
+    );
+    console.log("ATM total balance:");
+    console.log(atmTotalBalance);
+    console.log(notes);
+    const totalAvailable = currentBalance + (overdraftLimit - currentOverdraft);
+    if (atmTotalBalance < currentWithdrawal) {
+      setMessage(
+        "Sorry, insufficient funds in the ATM to complete this withdrawal. Please enter a smaller amount."
+      );
+    } else if (!brutAtmAlgo(notes, currentWithdrawal).length) {
+      const values: string[] = notes.map((note) =>
+        note.value.toString()
+      );
+      const message = `We can't provide the entered amount in available denominations. Please enter an amount divisible by: ${values.join(
+        ", "
+      )}.`;
+      setMessage(message);
+    } else if (totalAvailable < currentWithdrawal) {
+      setMessage(
+        "Withdrawal denied. Your requested amount exceeds both your account balance and overdraft limit."
+      );
+    } else if (currentBalance < currentWithdrawal) {
+      setCurrentScreen(ScreenType.OVERDRAFT_ALERT);
+    } else{
+      setCurrentScreen(ScreenType.WITHDRAWAL_CONFIRMATION);
+    }
+  };
 
   const handleDelete = () => {
     if (currentScreen === ScreenType.PIN_FORM) {
@@ -56,11 +98,11 @@ function Keypad() {
 
   const handleSubmit = () => {
     if (currentScreen === ScreenType.PIN_FORM) {
-      verifyPin()
-    }else{
+      verifyPin();
+    } else {
       confirmWithdrawal();
     }
-  }
+  };
 
   return (
     <section className="flex justify-center">

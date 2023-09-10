@@ -12,7 +12,7 @@ function Key({ value, disabled }: { value: string; disabled: boolean }) {
   return (
     <div>
       <button
-        className="bg-primary-lighter hover:bg-primary-light active:bg-light text-primary h-14 w-14 rounded-md disabled:cursor-not-allowed disabled:hover:bg-primary-lighter"
+        className="bg-primary-lighter hover:bg-primary-light active:bg-light text-primary h-14 w-14 rounded-md disabled:cursor-not-allowed disabled:hover:bg-primary-lighter shadow-md"
         disabled={disabled}
         onClick={() => {
           currentScreen === ScreenType.PIN_FORM

@@ -12,9 +12,9 @@ interface CustomerContext {
   setCurrentBalance: Dispatch<SetStateAction<number>>;
   currentWithdrawal: number;
   setCurrentWithdrawal: Dispatch<SetStateAction<number>>;
-  currentOverdrawn: number;
-  setCurrentOverdrawn: Dispatch<SetStateAction<number>>;
-  overdrawnLimit: number;
+  currentOverdraft: number;
+  setCurrentOverdraft: Dispatch<SetStateAction<number>>;
+  overdraftLimit: number;
 }
 
 const CustomerContext = createContext<CustomerContext>({
@@ -22,9 +22,9 @@ const CustomerContext = createContext<CustomerContext>({
   setCurrentBalance: () => {},
   currentWithdrawal: 0,
   setCurrentWithdrawal: () => {},
-  currentOverdrawn: 0,
-  setCurrentOverdrawn: () => {},
-  overdrawnLimit: 100,
+  currentOverdraft: 0,
+  setCurrentOverdraft: () => {},
+  overdraftLimit: 100,
 });
 
 export const useCustomer = () => {
@@ -34,8 +34,8 @@ export const useCustomer = () => {
 export const CustomerProvider = ({ children }: { children: React.ReactNode }) => {
   const [currentBalance, setCurrentBalance] = useState(0);
   const [currentWithdrawal, setCurrentWithdrawal] = useState(0);
-  const [currentOverdrawn, setCurrentOverdrawn] = useState(0);
-  const overdrawnLimit = 100;
+  const [currentOverdraft, setCurrentOverdraft] = useState(0);
+  const overdraftLimit = 100;
   return (
     <CustomerContext.Provider
       value={{
@@ -43,9 +43,9 @@ export const CustomerProvider = ({ children }: { children: React.ReactNode }) =>
         setCurrentBalance,
         currentWithdrawal, 
         setCurrentWithdrawal,
-        currentOverdrawn,
-        setCurrentOverdrawn,
-        overdrawnLimit,
+        currentOverdraft,
+        setCurrentOverdraft,
+        overdraftLimit,
       }}
     >
       {children}

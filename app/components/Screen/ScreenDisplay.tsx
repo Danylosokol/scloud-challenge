@@ -5,17 +5,22 @@ import Message from "./Screens/Message";
 import PinForm from "./Screens/PinForm";
 import Menu from "./Screens/Menu";
 import WithdrawalForm from "./Screens/WithdrawalForm";
+import OverdraftAlert from "./Screens/OverdraftAlert";
+import WithdrawalConfirmation from "./Screens/WithdrawalConfirmation";
+import WithdrawalResult from "./Screens/WithdrawalResult";
 import { ScreenType } from "./Screens/ScreensConsts";
 import { useATM } from "@/app/context/ATMProvider";
 import { useMessage } from "@/app/context/MessageProvider";
 import { usePin } from "@/app/context/PinProvider";
 import { useScreen } from "@/app/context/ScreenProvider";
+import { useCustomer } from "@/app/context/CustomerProvider";
 
 function ScreenDisplay() {
   const { isOn } = useATM();
   const { message, setMessage } = useMessage();
   const { isPinValid } = usePin();
   const {currentScreen, setCurrentScreen} = useScreen();
+  const {currentWithdrawal} = useCustomer();
 
   useEffect(() => {
     if (isOn) {
@@ -23,6 +28,8 @@ function ScreenDisplay() {
         setCurrentScreen(ScreenType.MESSAGE);
       } else if (!isPinValid) {
         setCurrentScreen(ScreenType.PIN_FORM);
+      } else if (isPinValid && currentWithdrawal){
+        setCurrentScreen(ScreenType.WITHDRAWAL_FORM);
       } else if (isPinValid) {
         setCurrentScreen(ScreenType.MENU);
       }
@@ -41,7 +48,13 @@ function ScreenDisplay() {
     case ScreenType.MESSAGE:
       return <Message message={message} onClick={() => setMessage("")} />;
     case ScreenType.WITHDRAWAL_FORM:
-      return <WithdrawalForm/>
+      return <WithdrawalForm />;
+    case ScreenType.OVERDRAFT_ALERT:
+      return <OverdraftAlert />;
+    case ScreenType.WITHDRAWAL_CONFIRMATION:
+      return <WithdrawalConfirmation />;
+    case ScreenType.WITHDRAWAL_RESULT:
+      return <WithdrawalResult />;
     default:
       return "Somthing went wrong...";
   }

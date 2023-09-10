@@ -10,7 +10,7 @@ function WithdrawalForm() {
 
   return (
     <section className="flex flex-col justify-center items-center text-primary h-full">
-      <h1 className="text-2xl mb-3">Please enter the withdrawal amount in :</h1>
+      <h1 className="text-2xl mb-3">Please enter the withdrawal amount in £</h1>
       <p className="mb-5 text-center">
         Use the physical keyboard. Press the green button to confirm.
       </p>

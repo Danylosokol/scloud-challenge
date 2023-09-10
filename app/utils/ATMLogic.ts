@@ -71,7 +71,7 @@ export function fillZeroAmountNotes(
     (a, b) => b.amount - a.amount
   );
   let cantReplaceFlag = false;
-  while (isTheirZero(sortedResult)) {
+  while (isThereZero(sortedResult)) {
     const zeroNote = sortedResult[sortedResult.length - 1];
     const zeroNoteIndx = availableNotes.findIndex(
       (obj) => obj.value === zeroNote.value
@@ -83,14 +83,24 @@ export function fillZeroAmountNotes(
         const difference = note.value / zeroNote.value;
         if (difference <= zeroNoteTotalAmount) {
           zeroNote["amount"] = difference;
+          availableNotes[zeroNoteIndx]["amount"] -= difference;
           sortedResult[i]["amount"] -= 1;
+          const noteIndx = availableNotes.findIndex(
+            (obj) => obj.value === sortedResult[i]["value"]
+          );
+          availableNotes[noteIndx]["amount"] += 1;
           break;
         }
       } else if (zeroNote.value % note.value === 0) {
         let difference = zeroNote.value / note.value;
         if (zeroNoteTotalAmount > 0) {
           zeroNote["amount"] = 1;
+          availableNotes[zeroNoteIndx]["amount"] -= 1;
           sortedResult[i]["amount"] -= difference;
+          const noteIndx = availableNotes.findIndex(
+            (obj) => obj.value === sortedResult[i]["value"]
+          );
+          availableNotes[noteIndx]["amount"] += difference;
           break;
         }
       }
@@ -125,11 +135,14 @@ export function balanceDistribution(
     const tempArr = balancedResult.map((obj) => {
       return { ...obj };
     });
+    const tempAvailable = availableNotes.map((obj) => {
+      return { ...obj };
+    });
     const smallestNote = tempArr[tempArr.length - 1];
-    const smallestNoteIndx = availableNotes.findIndex(
+    const smallestNoteIndx = tempAvailable.findIndex(
       (obj) => obj.value === smallestNote.value
     );
-    const smallestNoteTotalAmount = availableNotes[smallestNoteIndx]["amount"];
+    const smallestNoteTotalAmount = tempAvailable[smallestNoteIndx]["amount"];
     for (let i = 0; i < tempArr.length; i++) {
       const note = tempArr[i];
       if (note.value % smallestNote.value === 0) {
@@ -139,7 +152,12 @@ export function balanceDistribution(
           tempArr[tempArr.length - 1]["amount"] + difference
         ) {
           tempArr[tempArr.length - 1]["amount"] += difference;
+          tempAvailable[smallestNoteIndx]["amount"] -= difference;
           tempArr[i]["amount"] -= 1;
+          const noteIndx = tempAvailable.findIndex(
+            (obj) => obj.value === tempArr[i]["value"]
+          );
+          tempAvailable[noteIndx]["amount"] += 1;
           break;
         }
       } else if (smallestNote.value % note.value === 0) {
@@ -149,7 +167,12 @@ export function balanceDistribution(
           tempArr[tempArr.length - 1]["amount"] + 1
         ) {
           tempArr[tempArr.length - 1]["amount"] += 1;
+          tempAvailable[smallestNoteIndx]["amount"] -= 1;
           tempArr[i]["amount"] -= difference;
+          const noteIndx = tempAvailable.findIndex(
+            (obj) => obj.value === tempArr[i]["value"]
+          );
+          tempAvailable[noteIndx]["amount"] += difference;
           break;
         }
       }
@@ -162,6 +185,9 @@ export function balanceDistribution(
           return { ...obj };
         })
         .sort((a, b) => b.amount - a.amount);
+      for(let i in availableNotes){
+        availableNotes[i]["amount"] = tempAvailable[i]["amount"];
+      }
     } else {
       break;
     }
@@ -193,7 +219,7 @@ function biggestDifference(notes: NotesType[]): number {
  * @param notes - Array of NotesType.
  * @returns True if there's at least one note with zero amount, false otherwise.
  */
-function isTheirZero(notes: NotesType[]): boolean {
+function isThereZero(notes: NotesType[]): boolean {
   for (let note of notes) {
     if (note.amount === 0) {
       return true;
