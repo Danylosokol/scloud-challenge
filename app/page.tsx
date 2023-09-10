@@ -1,18 +1,24 @@
 import ATM from "./components/ATM";
-import { IsOnProvider } from "./context/IsOnProvider";
+import { ATMProvider } from "./context/ATMProvider";
 import { PinProvider } from "./context/PinProvider";
 import { MessageProvider } from "./context/MessageProvider";
+import { ScreenProvider } from "./context/ScreenProvider";
+import { CustomerProvider } from "./context/CustomerProvider";
 
 export default function Home() {
   return (
     <main className="bg-primary-light flex justify-center items-end min-h-[100vh] pt-5 md:pt-10">
-      <IsOnProvider>
+      <ATMProvider>
         <MessageProvider>
           <PinProvider>
-            <ATM />
+            <ScreenProvider>
+              <CustomerProvider>
+                <ATM />
+              </CustomerProvider>
+            </ScreenProvider>
           </PinProvider>
         </MessageProvider>
-      </IsOnProvider>
+      </ATMProvider>
     </main>
   );
 }

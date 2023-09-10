@@ -1,12 +1,13 @@
 import React from "react";
-import { useIsOn } from "@/app/context/IsOnProvider";
+import { useATM } from "@/app/context/ATMProvider";
 
 
 function Card() {
-  const {isOn, setIsOn} = useIsOn();
+  const {isOn, setIsOn} = useATM();
 
   return (
     <div
+      id="card"
       className={`h-20 w-36 bg-secondary rounded-b-sm text-primary flex items-end pb-10 cursor-pointer duration-1000 ${
         isOn ? "-translate-y-20" : "-translate-y-0"
       }`}

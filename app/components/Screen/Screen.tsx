@@ -5,19 +5,9 @@ import ScreenDisplay from './ScreenDisplay';
 function Screen() {
   return (
     <section className="flex justify-center mb-10">
-      {/* <nav className="flex flex-col justify-end gap-3">
-        <ScreenButton />
-        <ScreenButton />
-        <ScreenButton />
-        <ScreenButton />
-      </nav> */}
-      <ScreenDisplay/>
-      {/* <nav className="flex flex-col justify-end gap-3">
-        <ScreenButton />
-        <ScreenButton />
-        <ScreenButton />
-        <ScreenButton />
-      </nav> */}
+      <div className="bg-light w-full px-5 rounded-md h-72 mx-2 md:mx-5">
+        <ScreenDisplay />
+      </div>
     </section>
   );
 }
