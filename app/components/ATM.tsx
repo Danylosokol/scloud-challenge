@@ -16,7 +16,7 @@ function ATM() {
         />
       </header>
       <Screen />
-      <section className="flex flex-col md:flex-row justify-around">
+      <section className="flex flex-col lg:flex-row justify-around">
         <div className="flex flex-col md:flex-row md:justify-around lg:justify-start lg:flex-col gap-3 lg:gap-20">
           <CardReader />
           <Dispenser />
