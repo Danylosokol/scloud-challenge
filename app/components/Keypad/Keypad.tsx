@@ -12,7 +12,7 @@ import { NotesType } from "@/types/ATM";
 import axios from "axios";
 
 function Keypad() {
-  const { currentNotes } = useATM();
+  const { currentNotes, setIsLoading } = useATM();
   const { pin, setPin, setIsPinValid } = usePin();
   const { currentScreen, setCurrentScreen } = useScreen();
   const {
@@ -27,6 +27,7 @@ function Keypad() {
   const { setCurrentBalance } = useCustomer();
 
   const verifyPin = async () => {
+    setIsLoading(true);
     await axios
       .post("https://frontend-challenge.screencloud-michael.now.sh/api/pin/", {
         pin: pin,
@@ -44,6 +45,9 @@ function Keypad() {
         console.log(error);
         setMessage("Entered PIN is incorrect!");
         setPin("");
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -118,11 +122,13 @@ function Keypad() {
           />
         ))}
         <button
+          id="button-wrong"
           className="bg-wrong hover:bg-wrong-dark active:bg-wrong-light text-primary text-xs h-14 w-14 rounded-md disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-wrong"
           disabled={!pin.length && currentWithdrawal <= 0}
           onClick={() => handleDelete()}
         ></button>
         <button
+          id="button-right"
           className="bg-right hover:bg-right-dark active:bg-right-light text-primary text-xs h-14 w-14 rounded-md disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-right"
           disabled={!pin.length && currentWithdrawal <= 0}
           onClick={() => handleSubmit()}

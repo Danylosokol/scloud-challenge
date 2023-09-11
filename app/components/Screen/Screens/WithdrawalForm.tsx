@@ -16,6 +16,7 @@ function WithdrawalForm() {
       </p>
       <input
         type="text"
+        id="withdraw"
         className="py-2 px-1 border-primary border-2 rounded-md focus:border-secondary mb-5"
         autoFocus={true}
         value={"£" + currentWithdrawal.toString()}

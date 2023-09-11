@@ -1,6 +1,7 @@
 export enum ScreenType {
   GREETING = "GREETING",
   PIN_FORM = "PIN_FORM",
+  LOADING = "LOADING",
   MENU = "MENU",
   MESSAGE = "MESSAGE",
   WITHDRAWAL_FORM = "WITHDRAWAL_FORM",

@@ -3,6 +3,7 @@ import React, {useEffect} from "react";
 import Greeting from "./Screens/Greeting";
 import Message from "./Screens/Message";
 import PinForm from "./Screens/PinForm";
+import Loading from "./Screens/Loading";
 import Menu from "./Screens/Menu";
 import WithdrawalForm from "./Screens/WithdrawalForm";
 import OverdraftAlert from "./Screens/OverdraftAlert";
@@ -16,17 +17,21 @@ import { useScreen } from "@/app/context/ScreenProvider";
 import { useCustomer } from "@/app/context/CustomerProvider";
 
 function ScreenDisplay() {
-  const { isOn } = useATM();
+  const { isOn, isLoading } = useATM();
   const { message, setMessage } = useMessage();
   const { isPinValid } = usePin();
   const {currentScreen, setCurrentScreen} = useScreen();
   const {currentWithdrawal} = useCustomer();
+  console.log("Is loading:");
+  console.log(isLoading);
 
   useEffect(() => {
     if (isOn) {
       if (message) {
         setCurrentScreen(ScreenType.MESSAGE);
-      } else if (!isPinValid) {
+      } else if(isLoading){
+        setCurrentScreen(ScreenType.LOADING);
+      }else if (!isPinValid) {
         setCurrentScreen(ScreenType.PIN_FORM);
       } else if (isPinValid && currentWithdrawal){
         setCurrentScreen(ScreenType.WITHDRAWAL_FORM);
@@ -43,6 +48,8 @@ function ScreenDisplay() {
       return <Greeting />;
     case ScreenType.PIN_FORM:
       return <PinForm />;
+    case ScreenType.LOADING:
+      return <Loading />;
     case ScreenType.MENU:
       return <Menu />;
     case ScreenType.MESSAGE:
