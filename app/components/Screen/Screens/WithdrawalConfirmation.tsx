@@ -22,7 +22,7 @@ function WithdrawalConfirmation() {
     setCurrentOverdraft,
     overdraftLimit,
   } = useCustomer();
-  const { currentNotes, setCurrentNotes } = useATM();
+  const { currentNotes, setCurrentNotes, setGiveCash } = useATM();
   const { setCurrentScreen } = useScreen();
   const [withdrawalNotes, setWithdrawalNotes] = useState<NotesType[] | null>(
     null
@@ -61,6 +61,7 @@ function WithdrawalConfirmation() {
     const newBalance = currentBalance < currentWithdrawal ? 0 : currentBalance - currentWithdrawal;
     setCurrentBalance(newBalance);
     setCurrentWithdrawal(0);
+    setGiveCash(true);
     setCurrentScreen(ScreenType.WITHDRAWAL_RESULT);
   };
 
