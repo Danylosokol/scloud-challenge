@@ -9,9 +9,9 @@ function WithdrawalForm() {
   const {currentWithdrawal, setCurrentWithdrawal} = useCustomer();
 
   return (
-    <section className="flex flex-col justify-center items-center text-primary h-full">
-      <h1 className="text-2xl mb-3">Please enter the withdrawal amount in £</h1>
-      <p className="mb-5 text-center">
+    <section className="flex flex-col justify-center items-center text-primary h-full text-center">
+      <h1 className="text-2xl mb-3 font-bold">Enter the withdrawal amount in £</h1>
+      <p className="mb-5 text-center text-sm sm:text-base">
         Use the physical keyboard. Press the green button to confirm.
       </p>
       <input
@@ -25,7 +25,7 @@ function WithdrawalForm() {
         }}
       />
       <button
-        className="bg-secondary hover:bg-secondary-dark active:bg-secondary-light px-4 py-2 rounded-md"
+        className="bg-secondary hover:bg-secondary-dark active:bg-secondary-light px-10 py-2 rounded-md"
         onClick={() => setCurrentScreen(ScreenType.MENU)}
       >
         Back

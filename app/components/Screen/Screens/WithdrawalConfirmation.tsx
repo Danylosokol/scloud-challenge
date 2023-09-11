@@ -65,25 +65,25 @@ function WithdrawalConfirmation() {
   };
 
   return (
-    <section className="flex flex-col justify-center text-primary h-full px-10">
-      <h1 className="text-2xl mb-3">Transaction confirmation:</h1>
-      <ul className="mb-5">
-        <li>
-          <b>You&apos;re going to withdraw:</b> £{currentWithdrawal}{" "}
-          {currentWithdrawal > currentBalance &&
+    <section className="flex flex-col justify-center text-primary h-full">
+      <h1 className="text-2xl mb-3 font-bold">Transaction confirmation:</h1>
+      <ul className="mb-3 sm:mb-5 text-[.95rem] sm:text-base">
+        <li className="mb-1.5">
+          <b>You will withdraw:</b> £{currentWithdrawal}{" "}
+          <span className="italic">{currentWithdrawal > currentBalance &&
             `(£${
               currentWithdrawal - currentBalance
-            } will be taken from your overdraft)`}
+            } will be taken from overdraft)`}</span>
         </li>
         {withdrawalNotes && (
-          <li>
+          <li className="mb-1.5">
             <b>You will get:</b>{" "}
             {withdrawalNotes
               .map((note) => `${note.amount} × £${note.value}`)
               .join(", ")}
           </li>
         )}
-        <li>
+        <li className="mb-1.5">
           <b>Current balance:</b> £{currentBalance}
         </li>
         <li>

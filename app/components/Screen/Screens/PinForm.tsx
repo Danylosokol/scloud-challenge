@@ -9,9 +9,9 @@ function PinForm() {
   console.log(pin);
 
   return (
-    <section className="flex flex-col justify-center items-center text-primary h-full">
-      <h1 className="text-2xl mb-3">Please enter your PIN:</h1>
-      <p className="mb-5 text-center">
+    <section className="flex flex-col justify-center items-center text-primary h-full text-center">
+      <h1 className="text-2xl mb-3 font-bold">Enter your PIN:</h1>
+      <p className="mb-3 mb:mb-5 text-center">
         Use the physical keyboard. Press the green button to
         submit.
       </p>
@@ -23,7 +23,7 @@ function PinForm() {
         onChange={(event) => setPin(event.currentTarget.value)}
       />
       <button
-        className="bg-secondary hover:bg-secondary-dark active:bg-secondary-light px-4 py-2 rounded-md"
+        className="bg-secondary hover:bg-secondary-dark active:bg-secondary-light px-10 py-2 rounded-md"
         onClick={() => {
           setPin("");
           setIsOn(false);

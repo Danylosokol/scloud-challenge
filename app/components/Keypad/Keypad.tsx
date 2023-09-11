@@ -106,7 +106,7 @@ function Keypad() {
 
   return (
     <section className="flex justify-center">
-      <div className="grid grid-cols-3 bg-primary-dark text-primary gap-x-5 gap-y-3 rounded-md p-5 z-10">
+      <div className="grid grid-cols-3 bg-primary-dark text-primary gap-x-5 gap-y-3 rounded-md p-5 z-10 mb-5">
         {keysInfo.map((key, indx) => (
           <Key
             value={key.value}

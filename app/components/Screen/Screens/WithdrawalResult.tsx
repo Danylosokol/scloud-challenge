@@ -11,7 +11,7 @@ function WithdrawalResult() {
 
   return (
     <section className="flex flex-col justify-center items-center text-primary h-full">
-      <h1 className="text-2xl mb-2">Transaction was successful!</h1>
+      <h1 className="text-2xl mb-2 font-bold">Transaction was successful!</h1>
       <h2 className="text-1xl mb-10">Thank you for using ScreenCloud ATM!</h2>
       <section className="flex justify-between w-full">
         <button
