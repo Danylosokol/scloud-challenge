@@ -69,7 +69,7 @@ function WithdrawalConfirmation() {
       <h1 className="text-2xl mb-3">Transaction confirmation:</h1>
       <ul className="mb-5">
         <li>
-          <b>You're going to withdraw:</b> £{currentWithdrawal}{" "}
+          <b>You&apos;re going to withdraw:</b> £{currentWithdrawal}{" "}
           {currentWithdrawal > currentBalance &&
             `(£${
               currentWithdrawal - currentBalance
