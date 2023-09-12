@@ -22,8 +22,6 @@ function ScreenDisplay() {
   const { isPinValid } = usePin();
   const {currentScreen, setCurrentScreen} = useScreen();
   const {currentWithdrawal} = useCustomer();
-  console.log("Is loading:");
-  console.log(isLoading);
 
   useEffect(() => {
     if (isOn) {

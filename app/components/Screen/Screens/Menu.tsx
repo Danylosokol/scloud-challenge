@@ -18,7 +18,8 @@ function Menu() {
           <h1 className="text-2xl mb-3 font-bold">Account information:</h1>
           <ul className="mb-5">
             <li>
-              <b>Your current balance:</b> £{currentBalance}
+              <b>Your current balance:</b> £
+              <span data-testid="currentBalance">{currentBalance}</span>
             </li>
             <li>
               <b>Your available overdraft:</b> £

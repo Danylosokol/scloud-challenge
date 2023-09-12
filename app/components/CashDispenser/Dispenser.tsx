@@ -9,6 +9,8 @@ function Dispenser() {
     <section className="flex justify-center mb-5 relative">
       <div className="bg-primary border-right-dark border-2 rounded-b-md h-7 w-40"></div>
       <div
+        id="cash"
+        data-testid="cash"
         className={`absolute mt-1 outline-none overflow-hidden duration-1000 drop-shadow-2xl hover:drop-shadow-none ${
           giveCash ? "z-20" : "z-0"
         }`}

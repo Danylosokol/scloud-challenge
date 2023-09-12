@@ -5,8 +5,6 @@ import { useATM } from "@/app/context/ATMProvider";
 function PinForm() {
   const { pin, setPin } = usePin();
   const { setIsOn } = useATM();
-  console.log("Current PIN");
-  console.log(pin);
 
   return (
     <section className="flex flex-col justify-center items-center text-primary h-full text-center">

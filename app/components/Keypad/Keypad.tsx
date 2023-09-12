@@ -59,9 +59,6 @@ function Keypad() {
       },
       0
     );
-    console.log("ATM total balance:");
-    console.log(atmTotalBalance);
-    console.log(notes);
     const totalAvailable = currentBalance + (overdraftLimit - currentOverdraft);
     if (atmTotalBalance < currentWithdrawal) {
       setMessage(
@@ -129,6 +126,7 @@ function Keypad() {
         ></button>
         <button
           id="button-right"
+          data-testid="button-right"
           className="bg-right hover:bg-right-dark active:bg-right-light text-primary text-xs h-14 w-14 rounded-md disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-right"
           disabled={!pin.length && currentWithdrawal <= 0}
           onClick={() => handleSubmit()}

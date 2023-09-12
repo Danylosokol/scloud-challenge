@@ -35,8 +35,6 @@ function WithdrawalConfirmation() {
 
   const calculateWithdrawalNotes = () => {
     const notes: NotesType[] = currentNotes.map((obj) => ({ ...obj }));
-    console.log("Notes:");
-    console.log(notes);
     const result: NotesType[] = brutAtmAlgo(notes, currentWithdrawal);
     const resultComplete: NotesType[] = addMissingNotes(result, notes);
     const resultUnbalanced: NotesType[] = fillZeroAmountNotes(
