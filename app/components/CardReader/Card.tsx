@@ -13,7 +13,7 @@ function Card() {
       }`}
       onClick={() => setIsOn((prev) => !prev)}
     >
-      <span className="block -rotate-90">1234&nbsp;&nbsp;56</span>
+      <span className="block -rotate-90">5412&nbsp;&nbsp;84</span>
       <span className="block -rotate-90">Michal</span>
     </div>
   );

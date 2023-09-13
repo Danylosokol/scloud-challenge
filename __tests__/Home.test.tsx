@@ -27,7 +27,7 @@ describe("Critical Path Testing", () => {
     expect(myElem).toBeInTheDocument();
   });
 
-  it("After clicking on the card, we are getting screen to enter PIN", () => {
+  it("Should show form to enter PIN, after user has clicked on the card", () => {
     render(<Home />);
 
     const cardElement = screen.getByText("Michal");

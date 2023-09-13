@@ -57,7 +57,7 @@ export function addMissingNotes(
 }
 
 /**
- * Iteratively replaces notes with zero amount with available notes to make the amounts more balanced.
+ * Iteratively replaces available notes with zero-amount notes to make the amounts more balanced.
  *
  * @param resultComplete - Array of NotesType, which may contain notes with zero amounts.
  * @param availableNotes - Array of available notes in the ATM.

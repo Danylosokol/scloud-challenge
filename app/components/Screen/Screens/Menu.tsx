@@ -28,7 +28,7 @@ function Menu() {
           </ul>
         </div>
         <img
-          src="./scloud-logo.png"
+          src="./scloud-logo.webp"
           className="w-auto h-24 hidden sm:block"
           alt="ScreenCloud logo"
         />
