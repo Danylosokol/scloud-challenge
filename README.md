@@ -2,10 +2,10 @@
 
 ## Summary
 
-1. [Project Overwie]()
-2. [Installation Instructions]()
-3. [User Manual]()
-4. [Detailed Project Description]()
+1. [Project Overwie](#project-overwie)
+2. [Installation Instructions](#installation-instructions)
+3. [User Manual](#user-manual)
+4. [Detailed Project Description](#detailed-project-description)
 
 ## Project Overwie
 
